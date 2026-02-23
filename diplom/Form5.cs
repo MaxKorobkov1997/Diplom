@@ -1,4 +1,5 @@
-﻿using diplom.ta_ble;
+﻿using diplom.Database_management;
+using diplom.ta_ble;
 using Diplom;
 using System;
 using System.Data;
@@ -39,7 +40,7 @@ namespace diplom
             using (var context = new DBpodkl())
             {
                 int users = context.Users.Count();
-                MessageBox.Show(users.ToString());
+                //MessageBox.Show(users.ToString());
                 if (users == 0) button1.Enabled = true;
                 else button1.Enabled = false;
             }
@@ -47,16 +48,7 @@ namespace diplom
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (DBpodkl context = new DBpodkl())
-            {
-                User users = new User()
-                {
-                    Login = textBox1.Text,
-                    Password = textBox2.Text,
-                };
-                context.Users.Add(users);
-                context.SaveChanges();
-            }
+            add_bd.Add_user(textBox1.Text, textBox2.Text);
         }
     }
 }

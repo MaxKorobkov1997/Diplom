@@ -73,5 +73,19 @@ namespace diplom.Database_management
                 context.SaveChanges();
             }
         }
+
+        public static void Add_user(string login, string password)
+        {
+            using (var context = new DBpodkl())
+            {
+                var user = new User()
+                {
+                    Login = login,
+                    Password = password
+                };
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using diplom;
 using diplom.Database_management;
 using System.Reflection.Emit;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Diplom
 {
@@ -203,6 +204,64 @@ namespace Diplom
             // Отписываемся от события
             Form5 secondForm = (Form5)sender;
             secondForm.FormClosed -= SecondForm5_FormClosed;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            SearchAndHighlightRows(textBox1.Text);
+        }
+        private void SearchAndHighlightRows(string searchText)
+        {
+            dataGridView1.CurrentCell = null;
+            // 1. Предварительная очистка выделения и проверка входных данных
+            // Используем foreach для более чистого синтаксиса
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.Selected = false;
+            }
+
+            // Если строка поиска пуста, нет смысла продолжать
+            if (string.IsNullOrEmpty(searchText))
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                    row.Visible = true;
+                return;
+            }
+
+            // 2. Основной цикл поиска
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                // Пропускаем последнюю "новую" строку, если она отображается пользователю
+                if (row.IsNewRow) continue;
+
+                bool foundInRow = false;
+
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    // 3. Улучшенная проверка: убеждаемся, что значение ячейки не равно null
+                    if (cell.Value != null)
+                    {
+                        // 4. Используем ToLowerInvariant() для сравнения без учета регистра
+                        // (это более эффективно, чем создание нового StringComparison)
+                        string cellValue = cell.Value.ToString();
+                        if (cellValue.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) != -1)
+                        {
+                            foundInRow = true;
+                            break; // Нашли совпадение в этой строке, можно идти к следующей строке
+                        }
+                    }
+                }
+
+                if (foundInRow)
+                {
+                    row.Selected = true;
+                    row.Visible = true;
+                }
+                else
+                {
+                    row.Visible = false;
+                }
+            }
         }
     }
 }
