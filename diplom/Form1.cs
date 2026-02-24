@@ -1,5 +1,6 @@
 using diplom;
 using diplom.Database_management;
+using diplom.ta_ble;
 using System.Reflection.Emit;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -27,7 +28,7 @@ namespace Diplom
                         MessageBox.Show("Выберите социальную группу");
                     else
                     {
-                        add_bd.Add_jurnal(comboBox1.Text, comboBox2.Text, comboBox3.Text);
+                        add_bd.Add_jurnal(comboBox1.Text, (int)comboBox1.SelectedValue, comboBox2.Text, (int)comboBox2.SelectedValue, comboBox3.Text, (int)comboBox3.SelectedValue);
                         otkritie1();
                     }
                 }
@@ -46,6 +47,9 @@ namespace Diplom
             {
                 dataGridView1.Columns.Clear();
                 dataGridView1.DataSource = otkritie_tb.Otk_jurnal();
+                dataGridView1.Columns[7].Visible = false;
+                dataGridView1.Columns[8].Visible = false;
+                dataGridView1.Columns[9].Visible = false;
                 DataGridViewButtonColumn newColumn = new DataGridViewButtonColumn();
                 newColumn.HeaderText = "Новый столбец"; // Заголовок
                 newColumn.Name = "newColumn"; // Название столбца
@@ -71,40 +75,29 @@ namespace Diplom
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
             label1.Text = Static.user;
-            Combobox("[dbo].[Students] ");
-            Combobox("[dbo].[Fakultets] ");
-            Combobox("[dbo].[Vids] ");
+            Combobox();
             otkritie1();
             dataGridView1.Font = new Font("Microsoft Sans Serif", 14);
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
         }
-        private void Combobox(string NameT)
+        private void Combobox()
         {
             try
             {
                 comboBox3.Items.Clear();
                 comboBox1.Items.Clear();
                 comboBox2.Items.Clear();
-                using (DBpodkl Joorn = new DBpodkl())
-                {
-                    var lengths = Joorn.Vids.Select(e => new { e.Id, e.vid }).ToList();
-                    foreach (var length in lengths)
-                    {
-                        comboBox3.Items.Add(length.vid.ToString());
-                    }
-                    var lengths1 = Joorn.Fakultets.Select(e => new { e.Fakultets }).ToList();
-                    foreach (var length in lengths1)
-                    {
-                        comboBox2.Items.Add(length.Fakultets.ToString());
-                    }
-                    var lengths2 = Joorn.Students.Select(e => new { e.Name }).ToList();
-                    foreach (var length in lengths2)
-                    {
-                        comboBox1.Items.Add(length.Name.ToString());
-                    }
-                }
+                comboBox1.DataSource = otkritie_tb.otk_student();
+                comboBox1.ValueMember = "Id";
+                comboBox1.DisplayMember = "Name";
+                comboBox2.DataSource = otkritie_tb.otk_faculteet();
+                comboBox2.ValueMember = "Id";
+                comboBox2.DisplayMember = "Fakultets";
+                comboBox3.DataSource = otkritie_tb.otk_vidgr();
+                comboBox3.ValueMember = "Id";
+                comboBox3.DisplayMember = "vid";
             }
             catch (Exception ex)
             {
@@ -264,5 +257,7 @@ namespace Diplom
             }
         }
     }
+
+    internal record NewRecord(int Id, string Name, int Id_Neme, string Fakultet, int Id_Fakultet, ICollection<Vid> Vids, int Id_VidGr);
 }
 

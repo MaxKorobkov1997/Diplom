@@ -71,7 +71,7 @@
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(855, 463);
+            comboBox2.Location = new Point(855, 393);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(121, 23);
             comboBox2.TabIndex = 3;
@@ -79,7 +79,7 @@
             // comboBox3
             // 
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(855, 406);
+            comboBox3.Location = new Point(855, 445);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(121, 23);
             comboBox3.TabIndex = 4;

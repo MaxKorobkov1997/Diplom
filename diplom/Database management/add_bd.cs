@@ -6,18 +6,18 @@ namespace diplom.Database_management
 {
     internal static class add_bd
     {
-        public static void Add_jurnal(string name, string fakyltet, string vidgr)
+        public static void Add_jurnal(string name, int id_Name, string fakyltet, int id_Fakul, string vidgr, int id_vid)
         {
             using (var context = new DBpodkl())
             {
                 var Joorn = new Jurnal()
                 {
                     Name = name,
-                    Id_Neme = context.Students.Where(e => e.Name == name).FirstOrDefault().Id,
+                    Id_Neme = id_Name,
                     Fakultet = fakyltet,
-                    Id_Fakultet = context.Fakultets.Where(e => e.Fakultets == fakyltet).FirstOrDefault().Id,
+                    Id_Fakultet = id_Fakul,
                     VidGr = vidgr,
-                    Id_VidGr = context.Vids.Where(e => e.vid == vidgr).FirstOrDefault().Id
+                    Id_VidGr = id_vid
                 };
                 context.Jurnals.Add(Joorn);
                 context.SaveChanges();
