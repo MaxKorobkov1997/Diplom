@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             dataGridView1 = new DataGridView();
             label1 = new Label();
             comboBox1 = new ComboBox();
@@ -39,6 +40,7 @@
             button4 = new Button();
             button5 = new Button();
             textBox1 = new TextBox();
+            shapka1 = new diplom.shapka(components);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -54,7 +56,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(797, 8);
+            label1.Location = new Point(801, 20);
             label1.Name = "label1";
             label1.Size = new Size(38, 15);
             label1.TabIndex = 1;
@@ -126,7 +128,7 @@
             // 
             // button5
             // 
-            button5.Location = new Point(841, 0);
+            button5.Location = new Point(845, 12);
             button5.Name = "button5";
             button5.Size = new Size(97, 40);
             button5.TabIndex = 9;
@@ -147,7 +149,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1045, 647);
+            ClientSize = new Size(1045, 596);
             Controls.Add(textBox1);
             Controls.Add(button5);
             Controls.Add(button4);
@@ -180,5 +182,6 @@
         private Button button4;
         private Button button5;
         private TextBox textBox1;
+        private diplom.shapka shapka1;
     }
 }

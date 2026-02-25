@@ -18,6 +18,7 @@ namespace diplom
         bool minimizeHovered = false;
         Rectangle rectangle_Min = new Rectangle();
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Form Form { get; set; }
         private fStyle formStyle = fStyle.UserStyle;
         private int HeaderHeigt = 25;
@@ -29,6 +30,7 @@ namespace diplom
         public Font Font = new Font("Arial", 8.75f, FontStyle.Regular);
 
         private Size icon_size = new Size(14, 14);
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public fStyle Formstyle
         {
             get => formStyle;

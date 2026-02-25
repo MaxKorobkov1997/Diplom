@@ -9,8 +9,11 @@ namespace diplom.Database_management
             using (var context = new DBpodkl())
             {
                 var users = context.Jurnals.Where(o => o.Id == a).FirstOrDefault();
-                context.Jurnals.Remove(users);
-                context.SaveChanges();
+                if (users != null)
+                {
+                    context.Jurnals.Remove(users);
+                    context.SaveChanges();
+                }
             }
         }
 
@@ -19,8 +22,11 @@ namespace diplom.Database_management
             using (var context = new DBpodkl())
             {
                 var users = context.Students.Where(o => o.Id == a).FirstOrDefault();
-                context.Students.Remove(users);
-                context.SaveChanges();
+                if (users != null)
+                {
+                    context.Students.Remove(users);
+                    context.SaveChanges();
+                }
             }
         }
 
@@ -29,8 +35,11 @@ namespace diplom.Database_management
             using (var context = new DBpodkl())
             {
                 var users = context.Fakultets.Where(o => o.Id == a).FirstOrDefault();
-                context.Fakultets.Remove(users);
-                context.SaveChanges();
+                if (users != null)
+                {
+                    context.Fakultets.Remove(users);
+                    context.SaveChanges();
+                }
             }
         }
 
@@ -39,8 +48,11 @@ namespace diplom.Database_management
             using (var context = new DBpodkl())
             {
                 var users = context.Vids.Where(o => o.Id == a).FirstOrDefault();
-                context.Vids.Remove(users);
-                context.SaveChanges();
+                if (users != null)
+                {
+                    context.Vids.Remove(users);
+                    context.SaveChanges();
+                }
             }
         }
     }

@@ -46,10 +46,17 @@ namespace Diplom
             try
             {
                 dataGridView1.Columns.Clear();
-                dataGridView1.DataSource = otkritie_tb.Otk_jurnal();
-                dataGridView1.Columns[7].Visible = false;
-                dataGridView1.Columns[8].Visible = false;
-                dataGridView1.Columns[9].Visible = false;
+                var tb = otkritie_tb.Otk_jurnal().Select(e => new
+                {
+                    e.Id,
+                    e.Name,
+                    e.Id_Neme,
+                    e.Fakultet,
+                    e.Id_Fakultet,
+                    e.VidGr,
+                    e.Id_VidGr
+                }).ToList();
+                dataGridView1.DataSource = tb;
                 DataGridViewButtonColumn newColumn = new DataGridViewButtonColumn();
                 newColumn.HeaderText = "Новый столбец"; // Заголовок
                 newColumn.Name = "newColumn"; // Название столбца

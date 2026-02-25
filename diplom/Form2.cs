@@ -105,10 +105,12 @@ namespace diplom
                 {
                     string name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                     Enabled = false;
-
-                    Form6 f = new Form6(a, name, "fakultet");
-                    f.FormClosed += SecondForm6_FormClosed;
-                    f.Show();
+                    if (name != null)
+                    {
+                        Form6 f = new Form6(a, name, "fakultet");
+                        f.FormClosed += SecondForm6_FormClosed;
+                        f.Show();
+                    }
                 }
                 otkritie();
                 //}
